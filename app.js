@@ -1,127 +1,3 @@
-// === Mobile Fullscreen Player Logic ===
-const mobileFullPlayer = document.getElementById('mobileFullPlayer');
-const mobileFullPlayerClose = document.getElementById('mobileFullPlayerClose');
-const mobileFullPlayerCover = document.getElementById('mobileFullPlayerCover');
-const mobileFullPlayerSong = document.getElementById('mobileFullPlayerSong');
-const mobileFullPlayerArtist = document.getElementById('mobileFullPlayerArtist');
-const mobileFullPlayerTimeNow = document.getElementById('mobileFullPlayerTimeNow');
-const mobileFullPlayerTimeTotal = document.getElementById('mobileFullPlayerTimeTotal');
-const mobileFullPlayerSeek = document.getElementById('mobileFullPlayerSeek');
-const mobileFullPlayerPlay = document.getElementById('mobileFullPlayerPlay');
-const mobileFullPlayerPrev = document.getElementById('mobileFullPlayerPrev');
-const mobileFullPlayerNext = document.getElementById('mobileFullPlayerNext');
-const mobileFullPlayerLyrics = document.getElementById('mobileFullPlayerLyrics');
-
-function isMobile() {
-  return window.innerWidth < 600;
-}
-
-function showMobileFullPlayer() {
-  if (!isMobile()) return;
-  updateMobileFullPlayer();
-  mobileFullPlayer.hidden = false;
-  document.body.style.overflow = 'hidden';
-}
-
-function hideMobileFullPlayer() {
-  mobileFullPlayer.hidden = true;
-  document.body.style.overflow = '';
-}
-
-function updateMobileFullPlayer() {
-  // Assume currentTrack, audio, and getLyricsHtml are defined in main app
-  if (!window.currentTrack) return;
-  const track = window.currentTrack;
-  mobileFullPlayerCover.style.backgroundImage = `url('${track.cover || ''}')`;
-  mobileFullPlayerSong.textContent = track.title || '-';
-  mobileFullPlayerArtist.textContent = track.artist || '-';
-  mobileFullPlayerTimeNow.textContent = formatTime(window.audio?.currentTime || 0);
-  mobileFullPlayerTimeTotal.textContent = formatTime(window.audio?.duration || 0);
-  mobileFullPlayerSeek.value = window.audio?.currentTime || 0;
-  mobileFullPlayerSeek.max = window.audio?.duration || 0;
-  mobileFullPlayerLyrics.innerHTML = getLyricsHtml ? getLyricsHtml(track.lyrics) : '';
-  mobileFullPlayerPlay.innerHTML = window.audio?.paused ? '▶' : '❚❚';
-}
-
-// Event: mini player click (mobile only)
-const miniPlayer = document.querySelector('.player');
-if (miniPlayer) {
-  miniPlayer.addEventListener('click', function(e) {
-    if (isMobile()) {
-      e.stopPropagation();
-      showMobileFullPlayer();
-    }
-  });
-}
-
-// Event: close button
-if (mobileFullPlayerClose) {
-  mobileFullPlayerClose.addEventListener('click', hideMobileFullPlayer);
-}
-
-// Event: play/pause
-if (mobileFullPlayerPlay) {
-  mobileFullPlayerPlay.addEventListener('click', function() {
-    if (!window.audio) return;
-    if (window.audio.paused) window.audio.play();
-    else window.audio.pause();
-    updateMobileFullPlayer();
-  });
-}
-
-// Event: prev/next
-if (mobileFullPlayerPrev) {
-  mobileFullPlayerPrev.addEventListener('click', function() {
-    if (typeof playPrevTrack === 'function') playPrevTrack();
-    updateMobileFullPlayer();
-  });
-}
-if (mobileFullPlayerNext) {
-  mobileFullPlayerNext.addEventListener('click', function() {
-    if (typeof playNextTrack === 'function') playNextTrack();
-    updateMobileFullPlayer();
-  });
-}
-
-// Event: seek
-if (mobileFullPlayerSeek) {
-  mobileFullPlayerSeek.addEventListener('input', function() {
-    if (window.audio) window.audio.currentTime = Number(this.value);
-    updateMobileFullPlayer();
-  });
-}
-
-// Sync UI on audio timeupdate
-if (window.audio) {
-  window.audio.addEventListener('timeupdate', function() {
-    if (!mobileFullPlayer.hidden) updateMobileFullPlayer();
-  });
-  window.audio.addEventListener('play', function() {
-    if (!mobileFullPlayer.hidden) updateMobileFullPlayer();
-  });
-  window.audio.addEventListener('pause', function() {
-    if (!mobileFullPlayer.hidden) updateMobileFullPlayer();
-  });
-}
-
-// Hide overlay if resize to desktop
-window.addEventListener('resize', function() {
-  if (!isMobile()) hideMobileFullPlayer();
-});
-
-// Helper: format time
-function formatTime(sec) {
-  sec = Math.floor(sec || 0);
-  const m = Math.floor(sec / 60);
-  const s = sec % 60;
-  return m + ':' + (s < 10 ? '0' : '') + s;
-}
-
-// Helper: get lyrics html (fallback)
-function getLyricsHtml(lyrics) {
-  if (!lyrics) return '';
-  return '<pre style="white-space:pre-wrap;">' + lyrics + '</pre>';
-}
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
@@ -201,7 +77,7 @@ const db = {
   },
   categories: [
     { id: 'indo', name: 'Lagu Indo', icon: '🇮🇩' },
-    { id: 'english', name: 'Lagu Inggris', icon: '🇬🇧' },
+    { id: 'english', name: 'Lagu Inggris', icon: 'ENG' },
   ],
   tracks: [
     {
@@ -325,6 +201,30 @@ const db = {
       category: 'indo',
     },
     // English Songs
+    {
+      id: 't_birds_of_a_feather',
+      title: 'Birds of a Feather',
+      artist: 'Billie Eilish • 2024',
+      durationHint: '',
+      cover: ['#90caf9', '#f48fb1'],
+      coverImg: 'assets/covers/birds-of-a-feather.jpg',
+      src: 'assets/audio/birds-of-a-feather.mp3',
+      lyricsLrc: 'assets/lyrics/birds-of-a-feather.lrc',
+      lyricsTxt: '',
+      category: 'english',
+    },
+    {
+      id: 't_no_lie',
+      title: 'No Lie',
+      artist: 'Sean Paul ft. Dua Lipa • 2016',
+      durationHint: '',
+      cover: ['#ffd54f', '#4fc3f7'],
+      coverImg: 'assets/covers/no-lie.jpg',
+      src: 'assets/audio/no-lie.mp3',
+      lyricsLrc: 'assets/lyrics/no-lie.lrc',
+      lyricsTxt: '',
+      category: 'english',
+    },
     {
       id: 't_you_broke_me_first',
       title: 'You Broke Me First',
@@ -837,7 +737,17 @@ function renderMobileTrackList() {
       const realIndex = state.queue.findIndex((q) => q.id === t.id);
       if (realIndex >= 0) {
         loadIndex(realIndex);
-        play();
+        // Try to play immediately, and if blocked, show a prompt or try again on next user gesture
+        play().catch(() => {
+          // Autoplay was blocked, show a prompt or try again on next user gesture
+          const tryPlay = () => {
+            play();
+            window.removeEventListener('pointerdown', tryPlay);
+            window.removeEventListener('touchstart', tryPlay);
+          };
+          window.addEventListener('pointerdown', tryPlay, { once: true });
+          window.addEventListener('touchstart', tryPlay, { once: true });
+        });
       }
     });
     
@@ -868,9 +778,7 @@ function switchRoute(route) {
   const hero = $('.hero');
   const mobileHero = $('.mobile-hero');
   const mobileTracks = $('.mobile-tracks');
-  const searchBar = document.getElementById('searchBar');
-  const mobileSearchBar = document.getElementById('mobileSearchBar');
-
+  
   if (route === 'playlist') {
     // Show category selection
     if (hero) hero.style.display = 'none';
@@ -879,8 +787,6 @@ function switchRoute(route) {
     if (els.trackList) els.trackList.style.display = 'none';
     if (els.categorySection) els.categorySection.hidden = false;
     if (els.playlistView) els.playlistView.hidden = true;
-    if (searchBar) searchBar.style.display = 'none';
-    if (mobileSearchBar) mobileSearchBar.style.display = 'none';
     state.currentCategory = null;
     renderCategoryCards();
   } else {
@@ -891,8 +797,6 @@ function switchRoute(route) {
     if (els.trackList) els.trackList.style.display = '';
     if (els.categorySection) els.categorySection.hidden = true;
     if (els.playlistView) els.playlistView.hidden = true;
-    if (searchBar) searchBar.style.display = '';
-    if (mobileSearchBar) mobileSearchBar.style.display = '';
   }
   
   // Re-render track list based on route
@@ -1240,32 +1144,6 @@ function scrollerBy(el, dir = 1) {
 }
 
 function bindEvents() {
-        // Mobile mini player: klik untuk buka mode track (player besar)
-        const mobilePlayer = document.getElementById('mobilePlayer');
-        if (mobilePlayer) {
-          mobilePlayer.addEventListener('click', (e) => {
-            // Hanya jika klik di luar tombol play/next
-            if (e.target.closest('.mobile-player__btn')) return;
-            setUiMode('track');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          });
-        }
-      // Mobile Pilih Playlist button
-      const mobilePlaylistBtn = document.getElementById('mobilePlaylistBtn');
-      if (mobilePlaylistBtn) {
-        mobilePlaylistBtn.addEventListener('click', () => {
-          switchRoute('playlist');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      }
-    // Hero Pilih Playlist button
-    const heroPlaylistBtn = document.getElementById('heroPlaylist');
-    if (heroPlaylistBtn) {
-      heroPlaylistBtn.addEventListener('click', () => {
-        switchRoute('playlist');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
   // Sidebar
   els.openSidebar.addEventListener('click', openSidebar);
   els.collapseSidebar.addEventListener('click', closeSidebarIfMobile);
