@@ -1293,9 +1293,14 @@ function bindEvents() {
   // Mobile shuffle button
   if (els.mobileShuffleBtn) {
     els.mobileShuffleBtn.addEventListener('click', () => {
-      shuffleQueue();
-      loadIndex(0);
-      play();
+      // Tampilkan kategori playlist seperti tombol "PILIH PLAYLIST"
+      renderCategoryCards();
+      if (els.categorySection) els.categorySection.hidden = false;
+      if (els.playlistView) els.playlistView.hidden = true;
+      // Sembunyikan search bar dan track list mobile
+      if (els.mobileSearchInput) els.mobileSearchInput.parentElement.style.display = 'none';
+      if (els.mobileTrackList) els.mobileTrackList.innerHTML = '';
+      state.currentCategory = null;
     });
   }
 
