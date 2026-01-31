@@ -744,7 +744,9 @@ function switchRoute(route) {
   const hero = $('.hero');
   const mobileHero = $('.mobile-hero');
   const mobileTracks = $('.mobile-tracks');
-  
+  const searchBar = document.getElementById('searchBar');
+  const mobileSearchBar = document.getElementById('mobileSearchBar');
+
   if (route === 'playlist') {
     // Show category selection
     if (hero) hero.style.display = 'none';
@@ -753,6 +755,8 @@ function switchRoute(route) {
     if (els.trackList) els.trackList.style.display = 'none';
     if (els.categorySection) els.categorySection.hidden = false;
     if (els.playlistView) els.playlistView.hidden = true;
+    if (searchBar) searchBar.style.display = 'none';
+    if (mobileSearchBar) mobileSearchBar.style.display = 'none';
     state.currentCategory = null;
     renderCategoryCards();
   } else {
@@ -763,6 +767,8 @@ function switchRoute(route) {
     if (els.trackList) els.trackList.style.display = '';
     if (els.categorySection) els.categorySection.hidden = true;
     if (els.playlistView) els.playlistView.hidden = true;
+    if (searchBar) searchBar.style.display = '';
+    if (mobileSearchBar) mobileSearchBar.style.display = '';
   }
   
   // Re-render track list based on route
