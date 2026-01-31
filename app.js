@@ -1348,16 +1348,8 @@ function showWelcome() {
   const app = $('#app');
   const startBtn = $('#welcomeStart');
 
-  // Check if user has visited before
-  if (localStorage.getItem('weave_welcomed')) {
-    welcomeScreen.classList.add('hide');
-    setTimeout(() => welcomeScreen.remove(), 500);
-    app.hidden = false;
-    return;
-  }
 
   startBtn.addEventListener('click', () => {
-    localStorage.setItem('weave_welcomed', 'true');
     welcomeScreen.classList.add('hide');
     setTimeout(() => welcomeScreen.remove(), 500);
     app.hidden = false;
