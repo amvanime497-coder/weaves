@@ -1116,6 +1116,16 @@ function scrollerBy(el, dir = 1) {
 }
 
 function bindEvents() {
+        // Mobile mini player: klik untuk buka mode track (player besar)
+        const mobilePlayer = document.getElementById('mobilePlayer');
+        if (mobilePlayer) {
+          mobilePlayer.addEventListener('click', (e) => {
+            // Hanya jika klik di luar tombol play/next
+            if (e.target.closest('.mobile-player__btn')) return;
+            setUiMode('track');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+        }
       // Mobile Pilih Playlist button
       const mobilePlaylistBtn = document.getElementById('mobilePlaylistBtn');
       if (mobilePlaylistBtn) {
