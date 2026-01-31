@@ -1293,10 +1293,16 @@ function bindEvents() {
   // Mobile shuffle button
   if (els.mobileShuffleBtn) {
     els.mobileShuffleBtn.addEventListener('click', () => {
-      // Tampilkan kategori playlist seperti tombol "PILIH PLAYLIST"
+      // Tampilkan kategori playlist saja, SEMBUNYIKAN hero section (cover, judul lagu, dsb)
       renderCategoryCards();
       if (els.categorySection) els.categorySection.hidden = false;
       if (els.playlistView) els.playlistView.hidden = true;
+      // Sembunyikan hero section (desktop)
+      const heroSection = document.querySelector('.hero');
+      if (heroSection) heroSection.style.display = 'none';
+      // Sembunyikan mobile hero section
+      const mobileHero = document.querySelector('.mobile-hero');
+      if (mobileHero) mobileHero.style.display = 'none';
       // Sembunyikan search bar dan track list mobile
       if (els.mobileSearchInput) els.mobileSearchInput.parentElement.style.display = 'none';
       if (els.mobileTrackList) els.mobileTrackList.innerHTML = '';
