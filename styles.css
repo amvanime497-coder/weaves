@@ -1,3 +1,37 @@
+@media (max-width: 700px) {
+  .topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 1002;
+    background: linear-gradient(180deg, #101426 90%, #10142600 100%);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .tabs {
+    display: flex !important;
+    width: 100vw;
+    left: 0;
+    right: 0;
+    position: relative;
+    background: none;
+    border: none;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+  }
+  .tab {
+    flex: 1 1 0;
+    font-size: 15px;
+    padding: 14px 0;
+    border-radius: 0;
+    border: none;
+    background: none;
+  }
+}
 :root{
   --bg0:#070a12;
   --bg1:#0b1020;
