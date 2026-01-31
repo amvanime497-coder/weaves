@@ -77,7 +77,7 @@ const db = {
   },
   categories: [
     { id: 'indo', name: 'Lagu Indo', icon: '🇮🇩' },
-    { id: 'english', name: 'Lagu Inggris', icon: 'ENG' },
+    { id: 'english', name: 'Lagu Inggris', icon: '🇬🇧' },
   ],
   tracks: [
     {

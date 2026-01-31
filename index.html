@@ -68,9 +68,10 @@
         <div class="list" id="trackList"></div>
       </div>
 
-      <div class="sidebar__footer">
-        <button class="pill pill--ghost" id="collapseSidebar" type="button">Hide</button>
-      </div>
+        <div class="sidebar__footer" style="display: flex; align-items: center; gap: 12px;">
+          <button class="pill pill--ghost" id="collapseSidebar" type="button">Hide</button>
+          <div class="sidebar__footer-branding">Weave Music © 2026</div>
+        </div>
     </aside>
 
     <div class="overlay" id="overlay" hidden></div>
@@ -82,10 +83,41 @@
           <span aria-hidden="true">☰</span>
         </button>
 
-        <nav class="tabs" aria-label="Tabs">
+
+        <nav class="tabs tabs--responsive" aria-label="Tabs">
           <button class="tab tab--active" type="button" data-tab="discover">DISCOVER</button>
           <button class="tab" type="button" data-tab="playlist">PILIH PLAYLIST</button>
         </nav>
+  <style>
+    @media (max-width: 700px) {
+      .topbar .tabs--responsive {
+        width: 100vw;
+        left: 0;
+        right: 0;
+        position: fixed;
+        top: 0;
+        z-index: 1002;
+        background: linear-gradient(180deg, #101426 90%, #10142600 100%);
+        border-bottom: 1px solid rgba(255,255,255,.08);
+        display: flex;
+        justify-content: center;
+        gap: 0;
+        padding: 0;
+      }
+      .topbar .tabs--responsive .tab {
+        flex: 1 1 0;
+        font-size: 15px;
+        padding: 14px 0;
+        border-radius: 0;
+        border: none;
+        background: none;
+      }
+      .topbar {
+        grid-template-columns: 1fr;
+        padding-top: 48px;
+      }
+    }
+  </style>
 
         <div class="search">
           <span class="search__icon" aria-hidden="true">⌕</span>
@@ -224,6 +256,9 @@
     </div>
   </div>
 
+  <footer class="global-footer" style="width:100vw;text-align:center;font-size:13px;color:#aaa;padding:10px 0 18px 0;letter-spacing:0.01em;">
+    Developed by ahmadpadilah 2026
+  </footer>
   <script src="app.js?v=5"></script>
 </body>
 </html>
