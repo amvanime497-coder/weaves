@@ -351,9 +351,9 @@ body.mode-track .section{display:none}
 
 .player{
   position:fixed;
-  left:20px;right:20px;bottom:20px;
+  left:0; right:0; bottom:0;
   height:var(--player-h);
-  border-radius:22px;
+  border-radius:22px 22px 0 0;
   border:1px solid rgba(255,255,255,.10);
   background:linear-gradient(180deg, rgba(10,14,28,.70), rgba(7,10,18,.65));
   box-shadow:0 22px 70px rgba(0,0,0,.65);
