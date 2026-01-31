@@ -1,3 +1,114 @@
+/* Mobile Fullscreen Player Overlay */
+.mobile-fullplayer {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #181a2a;
+  color: #fff;
+  transition: opacity 0.2s;
+  overscroll-behavior: contain;
+}
+.mobile-fullplayer[hidden] {
+  display: none;
+}
+.mobile-fullplayer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 18px 0 18px;
+}
+.mobile-fullplayer__close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+}
+.mobile-fullplayer__title {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+}
+.mobile-fullplayer__cover {
+  width: 80vw;
+  max-width: 340px;
+  aspect-ratio: 1/1;
+  margin: 18px auto 0 auto;
+  border-radius: 18px;
+  background: #222 center/cover no-repeat;
+  box-shadow: 0 8px 32px 0 #0005;
+}
+.mobile-fullplayer__info {
+  text-align: center;
+  margin: 18px 0 0 0;
+}
+.mobile-fullplayer__song {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.mobile-fullplayer__artist {
+  font-size: 1rem;
+  color: #bdbdbd;
+}
+.mobile-fullplayer__seek {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 18px 18px 0 18px;
+}
+.mobile-fullplayer__range {
+  flex: 1;
+  accent-color: #a259ff;
+  height: 4px;
+}
+.mobile-fullplayer__time {
+  font-size: 0.9rem;
+  min-width: 38px;
+  text-align: center;
+}
+.mobile-fullplayer__controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  margin: 18px 0 0 0;
+}
+.mobile-fullplayer__btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2.1rem;
+  cursor: pointer;
+  padding: 0 8px;
+  transition: color 0.15s;
+}
+.mobile-fullplayer__btn--play {
+  font-size: 2.7rem;
+  color: #a259ff;
+}
+.mobile-fullplayer__lyrics {
+  flex: 1;
+  overflow-y: auto;
+  margin: 18px 0 0 0;
+  padding: 0 18px 18px 18px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #e0e0e0;
+  max-height: 30vh;
+}
+@media (min-width: 600px) {
+  .mobile-fullplayer {
+    display: none !important;
+  }
+}
 @media (max-width: 700px) {
   .topbar {
     position: fixed;

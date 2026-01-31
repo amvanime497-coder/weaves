@@ -1,3 +1,127 @@
+// === Mobile Fullscreen Player Logic ===
+const mobileFullPlayer = document.getElementById('mobileFullPlayer');
+const mobileFullPlayerClose = document.getElementById('mobileFullPlayerClose');
+const mobileFullPlayerCover = document.getElementById('mobileFullPlayerCover');
+const mobileFullPlayerSong = document.getElementById('mobileFullPlayerSong');
+const mobileFullPlayerArtist = document.getElementById('mobileFullPlayerArtist');
+const mobileFullPlayerTimeNow = document.getElementById('mobileFullPlayerTimeNow');
+const mobileFullPlayerTimeTotal = document.getElementById('mobileFullPlayerTimeTotal');
+const mobileFullPlayerSeek = document.getElementById('mobileFullPlayerSeek');
+const mobileFullPlayerPlay = document.getElementById('mobileFullPlayerPlay');
+const mobileFullPlayerPrev = document.getElementById('mobileFullPlayerPrev');
+const mobileFullPlayerNext = document.getElementById('mobileFullPlayerNext');
+const mobileFullPlayerLyrics = document.getElementById('mobileFullPlayerLyrics');
+
+function isMobile() {
+  return window.innerWidth < 600;
+}
+
+function showMobileFullPlayer() {
+  if (!isMobile()) return;
+  updateMobileFullPlayer();
+  mobileFullPlayer.hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+
+function hideMobileFullPlayer() {
+  mobileFullPlayer.hidden = true;
+  document.body.style.overflow = '';
+}
+
+function updateMobileFullPlayer() {
+  // Assume currentTrack, audio, and getLyricsHtml are defined in main app
+  if (!window.currentTrack) return;
+  const track = window.currentTrack;
+  mobileFullPlayerCover.style.backgroundImage = `url('${track.cover || ''}')`;
+  mobileFullPlayerSong.textContent = track.title || '-';
+  mobileFullPlayerArtist.textContent = track.artist || '-';
+  mobileFullPlayerTimeNow.textContent = formatTime(window.audio?.currentTime || 0);
+  mobileFullPlayerTimeTotal.textContent = formatTime(window.audio?.duration || 0);
+  mobileFullPlayerSeek.value = window.audio?.currentTime || 0;
+  mobileFullPlayerSeek.max = window.audio?.duration || 0;
+  mobileFullPlayerLyrics.innerHTML = getLyricsHtml ? getLyricsHtml(track.lyrics) : '';
+  mobileFullPlayerPlay.innerHTML = window.audio?.paused ? '▶' : '❚❚';
+}
+
+// Event: mini player click (mobile only)
+const miniPlayer = document.querySelector('.player');
+if (miniPlayer) {
+  miniPlayer.addEventListener('click', function(e) {
+    if (isMobile()) {
+      e.stopPropagation();
+      showMobileFullPlayer();
+    }
+  });
+}
+
+// Event: close button
+if (mobileFullPlayerClose) {
+  mobileFullPlayerClose.addEventListener('click', hideMobileFullPlayer);
+}
+
+// Event: play/pause
+if (mobileFullPlayerPlay) {
+  mobileFullPlayerPlay.addEventListener('click', function() {
+    if (!window.audio) return;
+    if (window.audio.paused) window.audio.play();
+    else window.audio.pause();
+    updateMobileFullPlayer();
+  });
+}
+
+// Event: prev/next
+if (mobileFullPlayerPrev) {
+  mobileFullPlayerPrev.addEventListener('click', function() {
+    if (typeof playPrevTrack === 'function') playPrevTrack();
+    updateMobileFullPlayer();
+  });
+}
+if (mobileFullPlayerNext) {
+  mobileFullPlayerNext.addEventListener('click', function() {
+    if (typeof playNextTrack === 'function') playNextTrack();
+    updateMobileFullPlayer();
+  });
+}
+
+// Event: seek
+if (mobileFullPlayerSeek) {
+  mobileFullPlayerSeek.addEventListener('input', function() {
+    if (window.audio) window.audio.currentTime = Number(this.value);
+    updateMobileFullPlayer();
+  });
+}
+
+// Sync UI on audio timeupdate
+if (window.audio) {
+  window.audio.addEventListener('timeupdate', function() {
+    if (!mobileFullPlayer.hidden) updateMobileFullPlayer();
+  });
+  window.audio.addEventListener('play', function() {
+    if (!mobileFullPlayer.hidden) updateMobileFullPlayer();
+  });
+  window.audio.addEventListener('pause', function() {
+    if (!mobileFullPlayer.hidden) updateMobileFullPlayer();
+  });
+}
+
+// Hide overlay if resize to desktop
+window.addEventListener('resize', function() {
+  if (!isMobile()) hideMobileFullPlayer();
+});
+
+// Helper: format time
+function formatTime(sec) {
+  sec = Math.floor(sec || 0);
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+// Helper: get lyrics html (fallback)
+function getLyricsHtml(lyrics) {
+  if (!lyrics) return '';
+  return '<pre style="white-space:pre-wrap;">' + lyrics + '</pre>';
+}
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 

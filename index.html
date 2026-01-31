@@ -1,3 +1,26 @@
+    <!-- Mobile fullscreen player overlay -->
+    <div class="mobile-fullplayer" id="mobileFullPlayer" hidden>
+      <div class="mobile-fullplayer__header">
+        <button class="mobile-fullplayer__close" id="mobileFullPlayerClose" type="button" aria-label="Tutup">✕</button>
+        <div class="mobile-fullplayer__title">Now Playing</div>
+      </div>
+      <div class="mobile-fullplayer__cover" id="mobileFullPlayerCover"></div>
+      <div class="mobile-fullplayer__info">
+        <div class="mobile-fullplayer__song" id="mobileFullPlayerSong">—</div>
+        <div class="mobile-fullplayer__artist" id="mobileFullPlayerArtist">—</div>
+      </div>
+      <div class="mobile-fullplayer__seek">
+        <span class="mobile-fullplayer__time" id="mobileFullPlayerTimeNow">0:00</span>
+        <input class="mobile-fullplayer__range" id="mobileFullPlayerSeek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek" />
+        <span class="mobile-fullplayer__time" id="mobileFullPlayerTimeTotal">0:00</span>
+      </div>
+      <div class="mobile-fullplayer__controls">
+        <button class="mobile-fullplayer__btn" id="mobileFullPlayerPrev" type="button">⟨⟨</button>
+        <button class="mobile-fullplayer__btn mobile-fullplayer__btn--play" id="mobileFullPlayerPlay" type="button">▶</button>
+        <button class="mobile-fullplayer__btn" id="mobileFullPlayerNext" type="button">⟩⟩</button>
+      </div>
+      <div class="mobile-fullplayer__lyrics" id="mobileFullPlayerLyrics"></div>
+    </div>
 <!doctype html>
 <html lang="id">
 <head>
