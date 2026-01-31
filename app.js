@@ -1,3 +1,13 @@
+// Tombol back di halaman kategori playlist (mobile/awal)
+document.addEventListener('DOMContentLoaded', () => {
+  const backBtn = document.getElementById('categoryBackBtn');
+  if (backBtn) {
+    backBtn.addEventListener('click', () => {
+      // Kembali ke halaman library utama (discover)
+      switchRoute('discover');
+    });
+  }
+});
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
