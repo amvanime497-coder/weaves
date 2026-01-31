@@ -1,3 +1,102 @@
+/* Mobile Search Back Button */
+.mobile-search__back {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--muted2);
+  font-size: 1.25em;
+  cursor: pointer;
+  padding: 0 6px 0 0;
+  line-height: 1;
+  border-radius: 50%;
+  transition: background .15s;
+  z-index: 2;
+}
+.mobile-search__back:active {
+  background: rgba(255,255,255,0.08);
+}
+.mobile-search__input {
+  padding-left: 32px;
+}
+/* Mobile Search Bar Custom */
+/* Mobile Search Bar Custom */
+.mobile-search-bar {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 12px;
+}
+.mobile-search__input {
+  width: 100%;
+  padding: 7px 32px 7px 12px;
+  font-size: 0.98em;
+  color: #fff;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: 10px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border .18s;
+}
+.mobile-search__input::placeholder {
+  color: rgba(234,240,255,.42);
+}
+.mobile-search__clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--muted2);
+  font-size: 1.25em;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  border-radius: 50%;
+  transition: background .15s;
+}
+.mobile-search__clear:active {
+  background: rgba(255,255,255,0.08);
+}
+/* Hero Search Bar Custom */
+.hero-search {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  z-index: 10;
+}
+.search--hero {
+  display: flex;
+  align-items: center;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: 18px;
+  padding: 2px 8px 2px 0;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.07);
+}
+.search--hero .search__icon {
+  margin-left: 10px;
+  margin-right: 6px;
+  color: var(--muted2);
+  font-size: 16px;
+}
+.search--hero input[type="search"] {
+  width: 180px;
+  max-width: 100%;
+  background: transparent;
+  border: none;
+  color: #fff;
+  padding: 7px 0 7px 0;
+  font-size: 1em;
+  outline: none;
+}
+.search--hero input[type="search"]::placeholder {
+  color: rgba(234,240,255,.42);
+}
 :root{
   --bg0:#070a12;
   --bg1:#0b1020;

@@ -20,8 +20,8 @@
         <div class="welcome__title">Weave</div>
       </div>
       <p class="welcome__desc">
-        Selamat datang di <strong>Weave Music</strong> — pemutar musik personal dengan tampilan modern dan dukungan lirik sinkron. 
-        Nikmati koleksi playlist favoritmu dengan pengalaman mendengarkan yang lebih imersif.
+        Selamat datang di <strong>Weave Music</strong> — pemutar musik personal dengan tampilan modern 
+        nikmati koleksi playlist favoritmu dengan pengalaman mendengarkan yang lebih imersif.
       </p>
       <div class="welcome__features">
         <div class="welcome__feature">
@@ -125,12 +125,12 @@
 
 
       <!-- Desktop hero section -->
-      <section class="hero" aria-label="Featured">
+      <section class="hero" aria-label="Featured" style="position:relative;">
         <div class="hero__bg" id="heroBg" aria-hidden="true"></div>
         <div class="hero__content">
           <div class="hero__kicker">FEATURED</div>
-          <h1 class="hero__title" id="heroTitle">Artist: Album</h1>
-          <p class="hero__desc" id="heroDesc">Deskripsi singkat album/artist.</p>
+          <h1 class="hero__title" id="heroTitle">Kami Belum Tentu</h1>
+          <p class="hero__desc" id="heroDesc">Beberapa Orang Memaafkan • 2018</p>
           <div class="hero__actions">
             <button class="pill" id="heroPlay" type="button">PLAY</button>
           </div>
@@ -149,6 +149,11 @@
 
       <!-- Mobile hero section -->
       <section class="mobile-hero" aria-label="Now Playing">
+        <!-- Mobile Search Bar -->
+        <div class="mobile-search-bar">
+          <input id="mobileSearchInput" type="search" class="mobile-search__input" placeholder="Search" autocomplete="off" />
+          <button type="button" class="mobile-search__clear" id="mobileSearchClear" aria-label="Clear search" style="display:none;">×</button>
+        </div>
         <div class="mobile-hero__cover" id="mobileHeroCover"></div>
         <div class="mobile-hero__info">
           <h1 class="mobile-hero__title" id="mobileHeroTitle">—</h1>
