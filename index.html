@@ -70,6 +70,7 @@
 
       <div class="sidebar__footer">
         <button class="pill pill--ghost" id="collapseSidebar" type="button">Hide</button>
+        <span style="margin-left:12px;opacity:0.7;font-size:0.98em;vertical-align:middle;">Weave 2026</span>
       </div>
     </aside>
 
@@ -99,7 +100,9 @@
 
       <!-- Category Selection -->
       <section class="category-section" id="categorySection" hidden>
-        <button class="category-section__back" id="categoryBackBtn" type="button" style="position:absolute;left:16px;top:16px;z-index:2;font-size:1.5em;background:none;border:none;color:#fff;opacity:0.8;cursor:pointer;">←</button>
+        <button class="category-section__back" id="categoryBackBtn" type="button" style="position:absolute;left:12px;top:12px;z-index:2;font-size:0.98em;padding:4px 13px 4px 10px;background:rgba(255,255,255,0.06);border:1.2px solid rgba(255,255,255,0.13);border-radius:8px;color:#fff;opacity:0.93;cursor:pointer;display:flex;align-items:center;gap:6px;box-shadow:0 1.5px 6px 0 rgba(0,0,0,0.07);">
+          <span style="font-size:1.08em;">←</span> <span style="font-size:0.97em;">Kembali</span>
+        </button>
         <div class="category-section__info" style="margin-top:36px;">
           <h2 class="category-section__title">Playlist Favoritmu</h2>
           <p class="category-section__desc">Pilih kategori untuk melihat koleksi lagu Indonesia atau lagu Inggris. Setiap playlist berisi lagu-lagu pilihan dengan lirik sinkron.</p>
@@ -120,11 +123,6 @@
         <div class="playlist-view__tracks" id="playlistViewTracks"></div>
       </section>
 
-      <!-- Mobile search bar -->
-      <div class="mobile-search">
-        <span class="mobile-search__icon">⌕</span>
-        <input class="mobile-search__input" id="mobileSearchInput" type="search" placeholder="Search" autocomplete="off" />
-      </div>
 
       <!-- Desktop hero section -->
       <section class="hero" aria-label="Featured">
