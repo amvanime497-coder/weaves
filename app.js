@@ -1110,6 +1110,14 @@ function scrollerBy(el, dir = 1) {
 }
 
 function bindEvents() {
+      // Mobile Pilih Playlist button
+      const mobilePlaylistBtn = document.getElementById('mobilePlaylistBtn');
+      if (mobilePlaylistBtn) {
+        mobilePlaylistBtn.addEventListener('click', () => {
+          switchRoute('playlist');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
     // Hero Pilih Playlist button
     const heroPlaylistBtn = document.getElementById('heroPlaylist');
     if (heroPlaylistBtn) {
