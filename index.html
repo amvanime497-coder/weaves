@@ -233,6 +233,58 @@
       <button class="mobile-player__btn" id="mobilePlayerPlayBtn" type="button" aria-label="Play">▶</button>
       <button class="mobile-player__btn" id="mobilePlayerNextBtn" type="button" aria-label="Next">⟩⟩</button>
     </div>
+
+    <!-- Mobile Now Playing Overlay -->
+    <div class="mobile-nowplaying" id="mobileNowPlaying" style="display:none;">
+      <button class="mobile-nowplaying__back" id="mobileNowPlayingBackBtn" aria-label="Back" type="button">
+        <svg width="32" height="32" viewBox="0 0 32 32"><polyline points="8,12 16,20 24,12" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="mobile-nowplaying__headerbar">
+        <div class="mobile-nowplaying__playlist" id="mobileNowPlayingPlaylist">MEMAINKAN DARI PLAYLIST</div>
+        <div class="mobile-nowplaying__playlist-title" id="mobileNowPlayingPlaylistTitle">Now Playing</div>
+      </div>
+      <div class="mobile-nowplaying__coverwrap">
+        <div class="mobile-nowplaying__cover" id="mobileNowPlayingCover"></div>
+      </div>
+      <div class="mobile-nowplaying__lyrics" id="mobileNowPlayingLyrics">—</div>
+      <div class="mobile-nowplaying__info-row">
+        <div class="mobile-nowplaying__info" style="width:100%;">
+          <div class="mobile-nowplaying__title" id="mobileNowPlayingTitle">—</div>
+          <div class="mobile-nowplaying__artist" id="mobileNowPlayingArtist">—</div>
+        </div>
+      </div>
+      <div class="mobile-nowplaying__progress">
+        <span id="mobileNowPlayingTimeNow">0:00</span>
+        <input type="range" id="mobileNowPlayingSeek" min="0" max="100" value="0" step="0.1" />
+        <span id="mobileNowPlayingTimeTotal">0:00</span>
+      </div>
+      <div class="mobile-nowplaying__controls">
+        <button id="mobileNowPlayingShuffle" aria-label="Shuffle" type="button" style="background:transparent;border:none;outline:none;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;">
+          <span style="display:inline-block;width:38px;height:38px;background:#5bb6ff;border-radius:8px;box-shadow:0 2px 8px rgba(30,100,255,0.10);display:flex;align-items:center;justify-content:center;">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="26" height="26" rx="6" fill="none"/>
+              <path d="M6 19C13 19 13 7 20 7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M17 4L21 7L17 10" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6 7C8.5 7 10.5 10 13 13C15.5 16 17.5 19 20 19" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M17 16L21 19L17 22" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+        <button id="mobileNowPlayingPrev" aria-label="Prev">⟨⟨</button>
+        <button id="mobileNowPlayingPlay" aria-label="Play/Pause">▶</button>
+        <button id="mobileNowPlayingNext" aria-label="Next">⟩⟩</button>
+        <button id="mobileNowPlayingRepeat" aria-label="Repeat" type="button" style="background:transparent;border:none;outline:none;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;">
+          <span style="display:inline-block;width:38px;height:38px;background:#5bb6ff;border-radius:8px;box-shadow:0 2px 8px rgba(30,100,255,0.10);display:flex;align-items:center;justify-content:center;">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="26" height="26" rx="6" fill="none"/>
+              <path d="M7 13C7 10.2386 9.23858 8 12 8C13.6569 8 15.1566 8.84285 16.0001 10.0858M19 13C19 15.7614 16.7614 18 14 18C12.3431 18 10.8434 17.1571 10 15.9142" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8 10L7 8L5 9" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M18 16L19 18L21 17" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
   </div>
 
   <script src="app.js?v=5"></script>

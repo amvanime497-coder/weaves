@@ -530,6 +530,19 @@ const db = {
       lyricsTxt: '',
       category: 'english',
     },
+    // Toxic - Britney Spears
+    {
+      id: 't_toxic',
+      title: 'Toxic',
+      artist: 'Britney Spears • 2003',
+      durationHint: '3:19',
+      cover: ['#ff1744', '#fbc02d'],
+      coverImg: 'assets/covers/toxic.jpg',
+      src: 'assets/audio/toxic.mp3',
+      lyricsLrc: 'assets/lyrics/toxic.lrc',
+      lyricsTxt: '',
+      category: 'english',
+    },
   ],
 };
 
@@ -942,7 +955,7 @@ function escapeAttr(s) {
     .replaceAll("'", '&#039;');
 }
 
-function loadIndex(i) {
+async function loadIndex(i) {
   state.index = clamp(i, 0, state.queue.length - 1);
   const t = state.queue[state.index];
   setHeroForTrack(t);
@@ -966,10 +979,14 @@ function loadIndex(i) {
 
   state.lyrics = { mode: 'none', lines: [], activeIndex: -1 };
   renderLyricsEmpty(`Memuat lirik untuk: ${t.title}…`);
-  void loadLyricsForTrack(t);
+  await loadLyricsForTrack(t);
 
   syncActiveTrackUI();
   updateMobileUI(t);
+  // Pastikan lirik langsung muncul di Now Playing mobile
+  if (document.getElementById('mobileNowPlaying').style.display === 'flex') {
+    updateMobileNowPlayingUI();
+  }
 }
 
 function updateMobileUI(t) {
@@ -1211,6 +1228,9 @@ function shuffleQueue() {
   state.queue = arr;
   state.filteredQueue = arr.slice();
   renderTrackList();
+  // Mainkan lagu pertama dari urutan baru
+  loadIndex(0);
+  play();
 }
 
 function updateMobilePlayButtons() {
@@ -1257,6 +1277,146 @@ function scrollerBy(el, dir = 1) {
 }
 
 function bindEvents() {
+    // Mobile Now Playing overlay
+    const mobilePlayer = document.getElementById('mobilePlayer');
+    const mobileNowPlaying = document.getElementById('mobileNowPlaying');
+    const mobileNowPlayingCloseBtn = document.getElementById('mobileNowPlayingCloseBtn');
+    const mobileNowPlayingBackBtn = document.getElementById('mobileNowPlayingBackBtn');
+    // Show overlay when mini player area clicked (kecuali tombol play/next)
+    if (mobilePlayer && mobileNowPlaying) {
+      mobilePlayer.addEventListener('click', (e) => {
+        // Jangan trigger jika klik tombol play/next
+        if (
+          e.target.closest('#mobilePlayerPlayBtn') ||
+          e.target.closest('#mobilePlayerNextBtn')
+        ) return;
+        updateMobileNowPlayingUI();
+        mobileNowPlaying.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
+    }
+    // Hide overlay when close button clicked
+    if (mobileNowPlayingCloseBtn && mobileNowPlaying) {
+      mobileNowPlayingCloseBtn.addEventListener('click', () => {
+        mobileNowPlaying.style.display = 'none';
+        document.body.style.overflow = '';
+      });
+    }
+    if (mobileNowPlayingBackBtn && mobileNowPlaying) {
+      mobileNowPlayingBackBtn.addEventListener('click', () => {
+        mobileNowPlaying.style.display = 'none';
+        document.body.style.overflow = '';
+      });
+    }
+
+    // Controls in overlay
+    const npPlay = document.getElementById('mobileNowPlayingPlay');
+    const npPrev = document.getElementById('mobileNowPlayingPrev');
+    const npNext = document.getElementById('mobileNowPlayingNext');
+    const npShuffle = document.getElementById('mobileNowPlayingShuffle');
+    const npRepeat = document.getElementById('mobileNowPlayingRepeat');
+    if (npPlay) npPlay.addEventListener('click', togglePlay);
+    if (npPrev) npPrev.addEventListener('click', prev);
+    if (npNext) npNext.addEventListener('click', next);
+    if (npShuffle) npShuffle.addEventListener('click', shuffleQueue);
+    if (npRepeat) npRepeat.addEventListener('click', () => {
+      audio.currentTime = 0;
+      play();
+    });
+
+  // Update Now Playing overlay UI with current track info
+  function updateMobileNowPlayingUI() {
+    const t = state.queue[state.index];
+    if (!t) return;
+    const cover = document.getElementById('mobileNowPlayingCover');
+    const title = document.getElementById('mobileNowPlayingTitle');
+    const artist = document.getElementById('mobileNowPlayingArtist');
+    const timeNow = document.getElementById('mobileNowPlayingTimeNow');
+    const timeTotal = document.getElementById('mobileNowPlayingTimeTotal');
+    const seek = document.getElementById('mobileNowPlayingSeek');
+    const playBtn = document.getElementById('mobileNowPlayingPlay');
+    const lyrics = document.getElementById('mobileNowPlayingLyrics');
+    const playlistTitle = document.getElementById('mobileNowPlayingPlaylistTitle');
+    // Cover
+    if (cover) cover.style.backgroundImage = t.coverImg ? `url('${t.coverImg}')` : '';
+    // Judul & artis
+    if (title) title.textContent = t.title;
+    if (artist) artist.textContent = t.artist;
+    // Playlist title (ganti jadi judul lagu)
+    if (playlistTitle) playlistTitle.textContent = t.title;
+    // Lirik satu baris (aktif jika ada lirik sinkron, atau baris pertama lirik statis)
+    if (lyrics) {
+      let baris = '-';
+      if (state.lyrics && state.lyrics.lines && state.lyrics.lines.length) {
+        if (state.lyrics.mode === 'lrc') {
+          // Cari baris aktif
+          const idx = state.lyrics.activeIndex ?? -1;
+          baris = idx >= 0 ? state.lyrics.lines[idx].txt : state.lyrics.lines[0].txt;
+        } else {
+          baris = state.lyrics.lines[0]?.txt || state.lyrics.lines[0] || '-';
+        }
+      }
+      // Jika lirik berubah, animasi fade
+      if (lyrics.textContent !== baris) {
+        lyrics.classList.add('lyric-fade');
+        setTimeout(() => {
+          lyrics.textContent = baris;
+          lyrics.classList.remove('lyric-fade');
+        }, 180);
+      }
+    }
+    // Progress
+    if (timeNow) timeNow.textContent = formatTime(audio.currentTime);
+    if (timeTotal) timeTotal.textContent = formatTime(audio.duration);
+    if (seek && Number.isFinite(audio.duration) && audio.duration > 0) {
+      seek.value = String((audio.currentTime / audio.duration) * 100);
+    } else if (seek) {
+      seek.value = '0';
+    }
+    // Play button
+    if (playBtn) playBtn.textContent = audio.paused ? '▶' : '⏸';
+  }
+
+  // Sync overlay progress bar and time with audio
+  const mobileNowPlayingSeek = document.getElementById('mobileNowPlayingSeek');
+  if (mobileNowPlayingSeek) {
+    mobileNowPlayingSeek.addEventListener('input', () => {
+      state.isSeeking = true;
+    });
+    mobileNowPlayingSeek.addEventListener('change', () => {
+      const pct = Number(mobileNowPlayingSeek.value) / 100;
+      if (Number.isFinite(audio.duration) && audio.duration > 0) {
+        audio.currentTime = pct * audio.duration;
+      }
+      state.isSeeking = false;
+    });
+  }
+
+  // Update Now Playing overlay UI on timeupdate
+  audio.addEventListener('timeupdate', () => {
+    if (document.getElementById('mobileNowPlaying').style.display === 'flex') {
+      updateMobileNowPlayingUI();
+    }
+  });
+
+  // Update lirik satu baris di Now Playing saat lirik aktif berubah
+  function syncActiveLyric() {
+    if (state.lyrics.mode !== 'lrc' || !state.lyrics.lines.length) return;
+    const t = audio.currentTime;
+    let idx = -1;
+    for (let i = 0; i < state.lyrics.lines.length; i++) {
+      if (state.lyrics.lines[i].t <= t) idx = i;
+      else break;
+    }
+    if (idx === state.lyrics.activeIndex) return;
+    state.lyrics.activeIndex = idx;
+    renderLyricsLines(state.lyrics.lines, idx);
+    // Update lirik satu baris di Now Playing
+    if (document.getElementById('mobileNowPlaying').style.display === 'flex') {
+      updateMobileNowPlayingUI();
+    }
+    // ...existing code...
+  }
   // Sidebar
   els.openSidebar.addEventListener('click', openSidebar);
   els.collapseSidebar.addEventListener('click', closeSidebarIfMobile);
