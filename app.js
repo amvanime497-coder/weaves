@@ -1,3 +1,22 @@
+// Mobile discover search (input di discover, bukan playlist)
+const mobileDiscoverSearchInput = document.getElementById('mobileDiscoverSearchInput');
+if (mobileDiscoverSearchInput) {
+  let t = null;
+  mobileDiscoverSearchInput.addEventListener('input', () => {
+    window.clearTimeout(t);
+    t = window.setTimeout(() => {
+      const query = mobileDiscoverSearchInput.value.trim().toLowerCase();
+      if (!query) {
+        state.filteredQueue = db.tracks.slice();
+      } else {
+        state.filteredQueue = db.tracks.filter((t) =>
+          (t.title + ' ' + t.artist).toLowerCase().includes(query)
+        );
+      }
+      renderMobileTrackList();
+    }, 80);
+  });
+}
 // Tombol back di halaman kategori playlist (mobile/awal)
 document.addEventListener('DOMContentLoaded', () => {
   const backBtn = document.getElementById('categoryBackBtn');
@@ -220,6 +239,90 @@ const db = {
       coverImg: 'assets/covers/birds-of-a-feather.jpg',
       src: 'assets/audio/birds-of-a-feather.mp3',
       lyricsLrc: 'assets/lyrics/birds-of-a-feather.lrc',
+      lyricsTxt: '',
+      category: 'english',
+    },
+    {
+      id: 't_the_way_lifes_goes',
+      title: 'The Way Life Goes',
+      artist: 'Unknown • 2026',
+      durationHint: '',
+      cover: ['#b39ddb', '#fbc02d'],
+      coverImg: 'assets/covers/the-way-lifes-goes.jpg',
+      src: 'assets/audio/the-way-lifes-goes.mp3',
+      lyricsLrc: 'assets/lyrics/the-way-lifes-goes.lrc',
+      lyricsTxt: '',
+      category: 'english',
+    },
+    {
+      id: 't_pop_is_rockstar',
+      title: 'Pop Is Rockstar',
+      artist: 'Unknown • 2026',
+      durationHint: '',
+      cover: ['#ffb300', '#8d6e63'],
+      coverImg: 'assets/covers/pop-is-rockstar.jpg',
+      src: 'assets/audio/pop-is-rockstar.mp3',
+      lyricsLrc: 'assets/lyrics/pop-is-rockstar.lrc',
+      lyricsTxt: '',
+      category: 'english',
+    },
+    {
+      id: 't_team_lorde',
+      title: 'Team',
+      artist: 'Lorde • 2013',
+      durationHint: '',
+      cover: ['#3949ab', '#f06292'],
+      coverImg: 'assets/covers/team-lorde.jpg',
+      src: 'assets/audio/team-lorde.mp3',
+      lyricsLrc: 'assets/lyrics/team-lorde.lrc',
+      lyricsTxt: '',
+      category: 'english',
+    },
+    {
+      id: 't_driver_licens_x_take_me_vhource',
+      title: 'Driver License x Take Me Vhource',
+      artist: 'Unknown • 2026',
+      durationHint: '',
+      cover: ['#e57373', '#64b5f6'],
+      coverImg: 'assets/covers/driver-licens-x-take-me-vhource.jpg',
+      src: 'assets/audio/driver-licens-x-take-me-vhource.mp3',
+      lyricsLrc: 'assets/lyrics/driver-licens-x-take-me-vhource.lrc',
+      lyricsTxt: '',
+      category: 'english',
+    },
+    {
+      id: 't_letdown',
+      title: 'Letdown',
+      artist: 'Unknown • 2026',
+      durationHint: '',
+      cover: ['#ba68c8', '#ff8a65'],
+      coverImg: 'assets/covers/letdown.jpg',
+      src: 'assets/audio/letdown.mp3',
+      lyricsLrc: 'assets/lyrics/letdown.lrc',
+      lyricsTxt: '',
+      category: 'english',
+    },
+    {
+      id: 't_cinamon_girl',
+      title: 'Cinamon Girl',
+      artist: 'Unknown • 2026',
+      durationHint: '',
+      cover: ['#fbc02d', '#4dd0e1'],
+      coverImg: 'assets/covers/cinamon-girl.jpg',
+      src: 'assets/audio/cinamon-girl.mp3',
+      lyricsLrc: 'assets/lyrics/cinamon-girl.lrc',
+      lyricsTxt: '',
+      category: 'english',
+    },
+    {
+      id: 't_the_winner_takes_it_all',
+      title: 'The Winner Takes It All',
+      artist: 'ABBA • 1980',
+      durationHint: '',
+      cover: ['#fff176', '#90caf9'],
+      coverImg: 'assets/covers/the-winner-takes-it-all.jpg',
+      src: 'assets/audio/the-winner-takes-it-all.mp3',
+      lyricsLrc: 'assets/lyrics/the-winner-takes-it-all.lrc',
       lyricsTxt: '',
       category: 'english',
     },
