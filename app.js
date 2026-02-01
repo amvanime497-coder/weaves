@@ -26,6 +26,73 @@ document.addEventListener('DOMContentLoaded', () => {
       switchRoute('discover');
     });
   }
+  // Animasi ketik per baris pada welcome__desc
+  const desc = document.querySelector('.welcome__desc');
+  if (desc) {
+    // Ambil isi HTML, pisahkan per baris (termasuk tag HTML)
+    const lines = desc.innerHTML.split(/<br\s*\/?>|\n/).map(line => line.trim()).filter(Boolean);
+    desc.innerHTML = '';
+    let i = 0;
+    function typeLine() {
+      if (i < lines.length) {
+        // Buat elemen span untuk tiap baris
+        const span = document.createElement('span');
+        span.style.display = 'block';
+        span.style.opacity = 0;
+        desc.appendChild(span);
+        // Efek ketik per karakter pada baris
+        let j = 0;
+        function typeChar() {
+          span.innerHTML = lines[i].slice(0, j);
+          span.style.opacity = 1;
+          if (j <= lines[i].length) {
+            j++;
+            setTimeout(typeChar, 18);
+          } else {
+            i++;
+            setTimeout(typeLine, 350);
+          }
+        }
+        typeChar();
+      }
+    }
+    setTimeout(typeLine, 600);
+  }
+
+  // Animasi ketik per kata pada judul dan deskripsi kategori playlist
+  function typewriterWords(selector, delay = 600, wordDelay = 90, lineDelay = 350) {
+    const el = document.querySelector(selector);
+    if (el) {
+      const lines = el.innerHTML.split(/<br\s*\/?>|\n/).map(line => line.trim()).filter(Boolean);
+      el.innerHTML = '';
+      let i = 0;
+      function typeLine() {
+        if (i < lines.length) {
+          const span = document.createElement('span');
+          span.style.display = 'block';
+          span.style.opacity = 0;
+          el.appendChild(span);
+          const words = lines[i].split(/(\s+)/); // include spaces
+          let j = 0;
+          function typeWord() {
+            span.innerHTML = words.slice(0, j).join('');
+            span.style.opacity = 1;
+            if (j <= words.length) {
+              j++;
+              setTimeout(typeWord, wordDelay);
+            } else {
+              i++;
+              setTimeout(typeLine, lineDelay);
+            }
+          }
+          typeWord();
+        }
+      }
+      setTimeout(typeLine, delay);
+    }
+  }
+  typewriterWords('.category-section__title', 400, 90, 300);
+  typewriterWords('.category-section__desc', 1200, 55, 0);
 });
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
