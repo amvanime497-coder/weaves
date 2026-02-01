@@ -121,6 +121,19 @@ const db = {
       lyricsTxt: 'assets/lyrics/kami-belum-tentu.txt',
       category: 'indo',
     },
+    // Runway - English Song
+    {
+      id: 't_runway',
+      title: 'Runway',
+      artist: 'Aurora • 2016',
+      durationHint: '1:49',
+      cover: ['#1976d2', '#ffd600'],
+      coverImg: 'assets/covers/runway.jpg',
+      src: 'assets/audio/runway.mp3',
+      lyricsLrc: 'assets/lyrics/runway.lrc',
+      lyricsTxt: '',
+      category: 'english',
+    },
     {
       id: 't_politirk',
       title: 'Politrik',
@@ -245,7 +258,7 @@ const db = {
     {
       id: 't_the_way_lifes_goes',
       title: 'The Way Life Goes',
-      artist: 'Unknown • 2026',
+      artist: 'Lil Uzi Vert • 2017',
       durationHint: '',
       cover: ['#b39ddb', '#fbc02d'],
       coverImg: 'assets/covers/the-way-lifes-goes.jpg',
@@ -257,7 +270,7 @@ const db = {
     {
       id: 't_pop_is_rockstar',
       title: 'Pop Is Rockstar',
-      artist: 'Unknown • 2026',
+      artist: 'Ayo & Teo • 2017',
       durationHint: '',
       cover: ['#ffb300', '#8d6e63'],
       coverImg: 'assets/covers/pop-is-rockstar.jpg',
@@ -281,7 +294,7 @@ const db = {
     {
       id: 't_driver_licens_x_take_me_vhource',
       title: 'Driver License x Take Me Vhource',
-      artist: 'Unknown • 2026',
+      artist: 'Olivia Rodrigo & Vhourse • 2021',
       durationHint: '',
       cover: ['#e57373', '#64b5f6'],
       coverImg: 'assets/covers/driver-licens-x-take-me-vhource.jpg',
@@ -293,7 +306,7 @@ const db = {
     {
       id: 't_letdown',
       title: 'Letdown',
-      artist: 'Unknown • 2026',
+      artist: 'KennyHoopla • 2020',
       durationHint: '',
       cover: ['#ba68c8', '#ff8a65'],
       coverImg: 'assets/covers/letdown.jpg',
@@ -305,7 +318,7 @@ const db = {
     {
       id: 't_cinamon_girl',
       title: 'Cinamon Girl',
-      artist: 'Unknown • 2026',
+      artist: 'Lana Del Rey • 2019',
       durationHint: '',
       cover: ['#fbc02d', '#4dd0e1'],
       coverImg: 'assets/covers/cinamon-girl.jpg',
@@ -425,7 +438,7 @@ const db = {
     {
       id: 't_love_me_not',
       title: 'Love Me Not',
-      artist: 'Artis • 2020',
+      artist: 'Ravyn Lenae • 2024',
       durationHint: '',
       cover: ['#c2185b', '#880e4f'],
       coverImg: 'assets/covers/love-me-not.jpg',
