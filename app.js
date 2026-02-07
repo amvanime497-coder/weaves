@@ -417,6 +417,18 @@ const db = {
                   lyricsLrc: 'assets/lyrics/under-the-influence.lrc',
                   lyricsTxt: '',
                   category: 'english',
+                  },
+                  {
+                    id: 't_cant_hold_us',
+                    title: "Can't Hold Us",
+                    artist: 'Macklemore & Ryan Lewis • 2011',
+                    durationHint: '',
+                    cover: ['#ffd600', '#18d07f'],
+                    coverImg: 'assets/covers/cant-hold-us.jpg',
+                    src: 'assets/audio/cant-hold-us.mp3',
+                    lyricsLrc: 'assets/lyrics/cant-hold-us.lrc',
+                    lyricsTxt: '',
+                    category: 'english',
     },
     {
       id: 't_politirk',
