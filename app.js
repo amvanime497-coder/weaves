@@ -852,6 +852,32 @@ const db = {
       lyricsTxt: '',
       category: 'english',
     },
+    // Clossdoors
+    {
+      id: 't_clossdoors',
+      title: 'Clossdoors',
+      artist: 'Ismail • 2016',
+      durationHint: '',
+      cover: ['#ff6b6b', '#4ecdc4'],
+      coverImg: 'assets/covers/clossdoors.jpg',
+      src: 'assets/audio/clossdoor.mp3',
+      lyricsLrc: 'assets/lyrics/clossdoors.lrc',
+      lyricsTxt: '',
+      category: 'english',
+    },
+    // Dusk Till Dawn - Zayn ft. Sia
+    {
+      id: 't_dusk_till_dawn',
+      title: 'Dusk Till Dawn',
+      artist: 'Zayn ft. Sia • 2017',
+      durationHint: '',
+      cover: ['#ffb74d', '#81c784'],
+      coverImg: 'assets/covers/dusktilldawn.png',
+      src: 'assets/audio/dusktilldawn.mp3',
+      lyricsLrc: 'assets/lyrics/dusktilldawn.lrc',
+      lyricsTxt: '',
+      category: 'english',
+    },
   ],
 };
 
